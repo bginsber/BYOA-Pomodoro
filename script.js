@@ -69,9 +69,16 @@ function switchMode() {
     timerId = null;
     isWorkTime = !isWorkTime;
     timeLeft = isWorkTime ? 25 * 60 : 5 * 60;
+    
+    // Update status text with emojis
     statusText.textContent = isWorkTime ? '☕ Work Time' : '🫖 Break Time';
+    
+    // Add animation
+    statusText.classList.remove('status-change');
+    void statusText.offsetWidth; // Trigger reflow
+    statusText.classList.add('status-change');
+    
     updateDisplay();
-    startTimer();
 }
 
 // Initialize
@@ -96,4 +103,6 @@ document.getElementById('mode-toggle').addEventListener('change', function() {
         statusText.textContent = '☕ Work Time';
         resetTimer();
     }
-}); 
+});
+
+document.getElementById('switch-mode').addEventListener('click', switchMode); 
