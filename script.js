@@ -82,4 +82,18 @@ updateDisplay();
 startButton.addEventListener('click', startTimer);
 pauseButton.addEventListener('click', pauseTimer);
 resetButton.addEventListener('click', resetTimer);
-document.getElementById('switch-mode').addEventListener('click', switchMode); 
+document.getElementById('mode-toggle').addEventListener('change', function() {
+    if (this.checked) {
+        // Break mode
+        isWorkTime = false;
+        timeLeft = 5 * 60; // 5 minutes for break
+        statusText.textContent = '🫖 Break Time';
+        resetTimer();
+    } else {
+        // Work mode
+        isWorkTime = true;
+        timeLeft = 25 * 60; // 25 minutes for work
+        statusText.textContent = '☕ Work Time';
+        resetTimer();
+    }
+}); 
